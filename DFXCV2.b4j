@@ -1,0 +1,73 @@
+﻿Version=4.7
+AppType=JavaFX
+NumberOfModules=2
+Module1=DockPane
+Module2=DockNode
+Build1=Default,com.stevel05.jdockfx
+NumberOfFiles=4
+File1=1.bjl
+File2=2.bjl
+File3=3.bjl
+File4=docknode.png
+NumberOfLibraries=4
+Library1=jcore
+Library2=jfx
+Library3=javaobject
+Library4=jreflection
+@EndOfDesignText@
+#Region Project Attributes 
+	#MainFormWidth: 800
+	#MainFormHeight: 500 
+	#AdditionalJar : dockfx-0.1b
+	#LibraryName: jDockFX
+	#LibraryAuthor: Steve Laming
+	#LibraryVersion: 0.04
+	
+#End Region
+
+Sub Process_Globals
+	Private fx As JFX
+	Private MainForm As Form
+
+	Private DockPane1 As DockPane
+	Private TDock1 As DockNode
+	Private TDock2 As DockNode
+	Private Button1 As Button
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	MainForm = Form1
+	
+	MainForm.RootPane.LoadLayout("1")
+	
+	TDock1.Initialize(Me,"TDock","TDock1",Null)
+	TDock1.Graphic(File.DirAssets,"docknode.png")
+	TDock1.PrefSize(MainForm.Width / 2,MainForm.Height)
+	TDock1.Pane.LoadLayout("2")
+	TDock1.Dock(DockPane1,"LEFT")
+	TDock1.Tag = "TDock1"
+	
+'	Methods of DockNode Return the DockNode when nothing Else meaningful Is returned so that methods can be chained
+	TDock2.Initialize(Me,"TDock","TDock2",Null).PrefSize(MainForm.Width / 2,MainForm.Height).Graphic(File.DirAssets,"docknode.png").Pane.LoadLayout("3")
+	TDock2.Dock(DockPane1,"RIGHT").Tag = "TDock2"
+	
+	MainForm.Show
+	
+	DockPane1.SetDefaultUserAgentStylesheet
+	
+	
+End Sub
+
+Sub TDock_Resized(Height As Double, Width As Double)
+	Dim TD As DockNode = Sender
+	Log(TD.Tag & " : " & Height & " : " & Width)
+End Sub
+
+Sub TDock_DockChanged(Docked As Boolean)
+	Dim TD As DockNode = Sender
+	Log("TDock Dock " & TD.Tag & " : " &  Docked)
+End Sub
+
+Sub Button1_Action
+	Log("Button1 Clicked")
+End Sub
