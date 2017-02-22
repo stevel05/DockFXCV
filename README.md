@@ -5,7 +5,7 @@
 
 To test it I recreated the example app (java code here : https://github.com/RobertBColton/DockFX/blob/master/src/main/java/org/dockfx/demo/DockFX.java)
 
-The B4j project is attached. The library hasn't been updated for a while, but I think I can use it as is, so I thought I would share it in case anybody else wanted to.
+The B4j project is attached. The library hasn't been updated for a while, but is very usable, so I thought I would share it in case anybody else wanted to.
 
 Download the zipped jar file (dockfx-0.1b.zip) from here : https://github.com/RobertBColton/DockFX/releases, unzip it and copy to your additional libraries folder.
 
